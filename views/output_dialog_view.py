@@ -76,4 +76,4 @@ class OutputDialog(QDialog):
             gdf.to_file(path, driver=file_type)
         except Exception as e:
             print(e)
-            error_msg(self, e)
+            error_msg(self, 'file output error ~')
