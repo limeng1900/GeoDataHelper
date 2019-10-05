@@ -1,3 +1,4 @@
+# pandas dataframe to table model
 from PyQt5.QtCore import QAbstractTableModel, Qt,QVariant,QModelIndex
 from pandas import DataFrame
 

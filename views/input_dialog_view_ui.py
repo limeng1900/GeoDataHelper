@@ -6,12 +6,8 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QLineEdit
-import geopandas as gpd
-import pandas as pd
-from message import error_msg
 
 class UI_FileDialog(object):
     COORDINATE_LIST = ['unknown', 'WGS84', 'BJ54', 'XIAN80', 'CGCS2000']

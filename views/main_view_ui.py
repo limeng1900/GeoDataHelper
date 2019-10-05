@@ -55,7 +55,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("GeoDataHelper", "GeoDataHelper"))
-        MainWindow.setWindowIcon(QIcon('./images/icon.ico'))
+        MainWindow.setWindowIcon(QIcon('./resources/images/icon.ico'))
         self.openButton.setText(_translate("open", "open"))
         self.saveButton.setText(_translate("save", "save"))
 
