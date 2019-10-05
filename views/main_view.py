@@ -18,7 +18,6 @@ class MainView(QMainWindow):
 
         # init dialog
         self._input_dialog = InputDialog(self._model, self._main_controller)
-        self._output_dialog = OutputDialog(self._model, self._main_controller)
 
         # connect widgets to controller
         #   show input dialog
@@ -41,5 +40,6 @@ class MainView(QMainWindow):
         if self._model.geo_dataframe.empty:
             error_msg(self, 'no file to output')
         else:
+            self._output_dialog = OutputDialog(self._model, self._main_controller)
             self._output_dialog.show()
 

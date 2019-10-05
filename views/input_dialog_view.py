@@ -14,12 +14,12 @@ class InputDialog(QDialog):
         self._ui.setupUi(self)
 
         # connect widgets to controller
-        self._ui.buttonBox.accepted.connect(lambda: self.accept(self._ui))
+        self._ui.buttonBox.accepted.connect(self.accept)
         self._ui.pushButton.clicked.connect(self.openfile)
+        self._ui.coordinateSelect.currentTextChanged.connect(self.on_coordination_change)
 
         # listen for model event signals
         self._model.file_path_changed.connect(self.on_file_path_changed)
-        self._model.coordination_change.connect(self.on_coordination_change)
 
     @pyqtSlot(str)
     def on_file_path_changed(self, value):
@@ -27,16 +27,17 @@ class InputDialog(QDialog):
 
     @pyqtSlot(str)
     def on_coordination_change(self):
-        self._model.coordination = self.coordinateSelect.currentText()
-        print(self.coord)
+        self._model.coordination = self._ui.coordinateSelect.currentText()
+        print(self._model.coordination)
 
     def openfile(self):
         openfile_path = QFileDialog.getOpenFileName(None, 'chose file', '',  '*.xlsx | *.xls | *.shp | *.geojson | *.json')
         self._model.file_path = openfile_path[0]
 
     # 点击OK
-    def accept(self, Dialog):
+    def accept(self):
         print('load data')
+        print(self._model.coordination)
         if self._model.file_path:
             try:
                 ext = self._model.file_path.split('.')[-1]
@@ -46,10 +47,10 @@ class InputDialog(QDialog):
                     self._controller.get_geo_dataframe()
                     self.close()
                 else:
-                    error_msg(Dialog, 'just support .shp .json .geojson')
+                    error_msg(self, 'just support .shp .json .geojson')
             except Exception as e:
                 print(e)
-                error_msg(Dialog, 'file input error，please check your file')
+                error_msg(self, 'file input error，please check your file')
         else:
-            error_msg(Dialog, 'please chose one file')
+            error_msg(self, 'please chose one file')
 

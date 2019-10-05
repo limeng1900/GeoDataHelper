@@ -1,9 +1,10 @@
 from PyQt5.QtCore import QObject, pyqtSignal
+from geopandas import GeoDataFrame
 
 
 class Model(QObject):
     file_path_changed = pyqtSignal(str)
-    coordination_change = pyqtSignal(str)
+    coordination_changed = pyqtSignal(str)
     geo_dataframe_changed = pyqtSignal(object)
 
     @property
@@ -37,5 +38,5 @@ class Model(QObject):
         super().__init__()
 
         self._file_path = ''
-        self._coordination = ''
-        self._geo_dataframe = None
+        self._coordination = 'unkonw'
+        self._geo_dataframe = GeoDataFrame()

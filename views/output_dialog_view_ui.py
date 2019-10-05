@@ -11,14 +11,9 @@ from PyQt5.QtWidgets import QLineEdit
 from const.const import CONST
 
 class UI_SaveDialog(object):
-    COORDINATE_LIST = ['unknown', 'WGS84', 'BJ54', 'XIAN80', 'CGCS2000']
     FILE_TYPES = CONST.FILE_EXT.keys()
 
-    def setupUi(self, Dialog):
-        self.path = ''
-        self.coord = ''
-        self.ext = ''
-        self.gdf = None
+    def setupUi(self, Dialog, currentCoord):
         Dialog.setObjectName("Dialog")
         Dialog.resize(423, 301)
         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
@@ -43,7 +38,7 @@ class UI_SaveDialog(object):
         self.coordinateSelect = QtWidgets.QComboBox(Dialog)
         self.coordinateSelect.setGeometry(QtCore.QRect(30, 110, 231, 28))
         self.coordinateSelect.setObjectName("coordinateSelect")
-        self.coordinate_init()
+        self.coordinate_init(currentCoord)
         self.filetypeCombobox = QtWidgets.QComboBox(Dialog)
         self.filetypeCombobox.setGeometry(QtCore.QRect(30, 160, 231, 28))
         self.filetypeCombobox.setObjectName("coordinateSelect")
@@ -58,8 +53,14 @@ class UI_SaveDialog(object):
         self.pushButton.setText(_translate("Dialog", "open file"))
 
 
-    def coordinate_init(self):
-        self.coordinateSelect.addItems(self.COORDINATE_LIST)
+    def coordinate_init(self, currentCoord):
+        if currentCoord == 'unknow':
+            self.coordinateSelect.addItem('unknow')
+        else:
+            self.coordinateSelect.addItems(['WGS84', 'BJ54', 'XIAN80', 'CGCS2000'])
+            index = self.coordinateSelect.findText(currentCoord, QtCore.Qt.MatchFixedString)
+            if index >= 0:
+                self.coordinateSelect.setCurrentIndex(index)
 
     def filetype_init(self):
         self.filetypeCombobox.addItems(self.FILE_TYPES)

@@ -4,7 +4,7 @@ from PyQt5.QtCore import QObject, pyqtSignal
 class OutputModel(QObject):
     file_path_changed = pyqtSignal(str)
     file_type_changed = pyqtSignal(str)
-    coordination_change = pyqtSignal(str)
+    coordination_changed = pyqtSignal(str)
 
     @property
     def file_path(self):
